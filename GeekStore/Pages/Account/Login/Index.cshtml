@@ -1,0 +1,68 @@
+﻿@page
+@model GeekStore.Pages.Account.Login.IndexModel
+@{
+    Layout = "Shared/_LayoutDeslogado";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="ruta/a/bootstrap.min.css">
+    <script src="ruta/a/jquery.min.js"></script>
+    <script src="ruta/a/bootstrap.min.js"></script>
+</head>
+<body class="vh-98 gradient-custom">
+    <section>
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <div class="mb-md-5 mt-md-4 pb-5">
+
+                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                <p class="text-white-50 mb-5">Por favor, entre com seu Login e Senha!</p>
+                                <form method="post" asp-page-handler="Login">
+                                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                                        <input asp-for="Model!.Email" class="form-control form-control-lg" />
+                                        <label class="form-label mt-2" asp-for="Model!.Email">E-mail</label>
+                                        <span asp-validation-for="Model!.Email" class="text-danger"></span>
+                                    </div>
+
+                                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                                        <input asp-for="Model!.Password" class="form-control form-control-lg" />
+                                        <label class="form-label mt-2" asp-for="Model!.Password">Senha</label>
+                                        <span asp-validation-for="Model!.Password" class="text-danger"></span>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label asp-for="Model!.RememberMe">
+                                                <input asp-for="Model!.RememberMe"/>
+                                                @Html.DisplayNameFor(m => m.Model!.RememberMe)
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Esqueceu sua senha?</a></p>
+
+                                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg px-5 button-entrar" type="submit">Entrar</button>
+                                </form>
+                            </div>
+
+                            <div>
+                                <p class="mb-0">
+                                    Não possui uma conta? <a asp-page="/Account/Register/Index" class="text-white-50 fw-bold">Criar conta</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
