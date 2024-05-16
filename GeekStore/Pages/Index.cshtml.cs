@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GeekStore.Pages
 {
-    [Authorize]
+    //[Authorize]
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -13,7 +13,7 @@ namespace GeekStore.Pages
         {
             _logger = logger;
         }
-
+                                                                                                                                                                                                
         public void OnGet()
         {
 

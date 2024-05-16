@@ -1,0 +1,39 @@
+﻿@page
+@model GeekStore.Areas.Admin.Pages.IndexModel
+@{
+    Layout = "Shared/_Layout";
+}
+
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <strong>Tabela de Usuários</strong>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped table-borderless">
+                        <thead class="table-dark">
+                        <tr class="table100-head">
+                            <th class="column1">Nome do Usuário</th>
+                            <th class="column2">E-mail</th>
+                            <th class="column3">Permissão</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var users in Model.Table!)
+                        {
+                            <tr>
+                                <td class="column1">@users.UserName</td>
+                                <td class="column2">@users.Email</td>
+                                <td class="column3">@users.RoleName</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿@page
+@using Microsoft.IdentityModel.Tokens
+@model GeekStore.Areas.Admin.Pages.AdminRoles.EditModel
+@{
+    Layout = "Shared/_LayoutVazio";
+}
+<link rel="stylesheet" href="~/css/tableStyleSimplificada.css" />
+
+<body cz-shortcut-listen="true">
+    <form method="post">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Tabela de não membros da Role: <strong>@Model.RoleEdit!.Role!.Name</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered table-striped table-borderless">
+                                    <thead class="table-dark">
+                                        <tr class="table100-head">
+                                            <th scope="col">E-mail</th>
+                                            <th scope="col">Incluir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (Model.RoleEdit!.NonMembers.IsNullOrEmpty())
+                                        {
+                                            <p>Todos os usuários são membros dessa role.</p>
+                                        }
+                                        else
+                                        {
+                                            @foreach (var roles in Model.RoleEdit!.NonMembers!)
+                                            {
+                                                <tr>
+                                                    <th scope="row">@roles.Email</th>
+                                                    <td><input class="form" type="checkbox" name="addIds" value="@roles.Id" /></td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Tabela de membros da Role: <strong>@Model.RoleEdit!.Role!.Name</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered table-striped table-borderless">
+                                    <thead class="table-dark">
+                                        <tr class="table100-head">
+                                            <th scope="col">E-mail</th>
+                                            <th scope="col">Excluir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.RoleEdit!.Members.IsNullOrEmpty())
+                                        {
+                                            <p>Não existe nenhum usuário cadastrado nessa role.</p>
+                                        }
+                                        else
+                                        {
+                                            @foreach (var roles in Model.RoleEdit!.Members!)
+                                            {
+                                                <tr>
+                                                    <th scope="row">@roles.Email</th>
+                                                    <td><input class="form" type="checkbox" name="deleteIds" value="@roles.Id" /></td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 pt-2 text-center">
+            <input type="hidden" asp-page-handler="OnPost" />
+            <input data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Salvar" />
+        </div>
+    </form>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dataTable = new DataTable('table', {
+            language: {
+                url: '/js/dataTablesTranslate/pt-br.json',
+            }
+        });
+    });
+</script>

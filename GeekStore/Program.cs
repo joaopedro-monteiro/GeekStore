@@ -1,4 +1,5 @@
 using GeekStore.Core.Config;
+using GeekStore.Core.Services.Accounts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.RegisterDatabase();
 builder.Services.RegisterIdentity();
+builder.Services.RegisterSeedUserRoleInitialConfig();
+builder.Services.RegisterTableUserWithRoleConfig();
 
 var app = builder.Build();
 
@@ -22,9 +25,23 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+await CriarPerfisUsuariosAsync(app);
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
 
 app.Run();
+
+async Task CriarPerfisUsuariosAsync(WebApplication app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        await service.SeedRolesAsync();
+        await service.SeedUsersAsync();
+    }
+}

@@ -1,0 +1,44 @@
+﻿@page
+@model GeekStore.Areas.Admin.Pages.AdminRoles.IndexModel
+@{
+}
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <strong>Tabela de Roles</strong>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped table-borderless">
+                        <thead class="table-dark">
+                            <tr class="table100-head">
+                                <th scope="col">Id</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Nome Normalizado</th>
+                                <th scope="col">Concurrency Stamp</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var roles in Model.Roles!)
+                            {
+                                <tr>
+                                    <th scope="row">@roles.Id</th>
+                                    <td>@roles.Name</td>
+                                    <td>@roles.NormalizedName</td>
+                                    <td>@roles.ConcurrencyStamp</td>
+                                    <td>
+                                        <a asp-page="Edit" asp-route-id="@roles.Id"><i class="fa-solid fa-pen-to-square" title="Editar"></i></a>
+                                        <a asp-page="Delete" asp-route-id="@roles.Id"><i class="fa-solid fa-trash" title="Excluir"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
