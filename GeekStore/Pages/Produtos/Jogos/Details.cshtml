@@ -1,0 +1,67 @@
+﻿@page
+@model GeekStore.Pages.Produtos.Jogos.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Jogos</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jogos.Plataforma)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jogos.Plataforma)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jogos.PrazoDeGarantia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jogos.PrazoDeGarantia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jogos.CodBarras)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jogos.CodBarras)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jogos.NomeDoProduto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jogos.NomeDoProduto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jogos.ProdutoCategoria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jogos.ProdutoCategoria)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jogos.Fabricante)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jogos.Fabricante)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jogos.Quantidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jogos.Quantidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jogos.Valor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jogos.Valor)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Jogos.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

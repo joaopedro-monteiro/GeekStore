@@ -9,6 +9,7 @@ builder.Services.RegisterDatabase();
 builder.Services.RegisterIdentity();
 builder.Services.RegisterSeedUserRoleInitialConfig();
 builder.Services.RegisterTableUserWithRoleConfig();
+builder.Services.RegisterRoutes();
 
 var app = builder.Build();
 

@@ -3,7 +3,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <ul class="nav-item">
+    <ul class="nav-item text-light">
         <form method="post" asp-page="/Account/Login/Index" asp-page-handler="Logout">
             <button type="submit" class="nav-link btn btn-link py-0">
                 Logout @User.Identity!.Name
@@ -14,13 +14,13 @@
 
 else
 {
-    <ul class="nav-item">
+    <ul class="nav-item text-light">
         <a class="nav-link" asp-page="/Account/Register/Index">
             Registrar
         </a>
     </ul>
     <ul class="nav-item">
-        <a class="nav-link" asp-page="/Account/Login/Index">
+        <a class="nav-link text-light" asp-page="/Account/Login/Index">
             Login
         </a>
     </ul>

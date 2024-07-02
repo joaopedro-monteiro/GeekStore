@@ -1,0 +1,310 @@
+﻿@page
+@model GeekStore.Pages.Venda.NovaVendaModel
+@{
+}
+
+<body class="vh-98 gradient-custom">
+    <section>
+        <div class="container  h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-10">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Registrar Venda</h3>
+                            <form method="post" onsubmit="habilitarCampoParcelamento()">
+                                <div class="text-center mb-2">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Adicionar Produto
+                                    </button>
+                                </div>
+
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <select id="formaPagamento" class="form-select form-select-lg" asp-for="Venda.TipoPagamento" onblur="statusPagamento()">
+                                                <option value="">Selecione uma opção</option>
+                                                <option value="Dinheiro">Dinheiro</option>
+                                                <option value="Crédito">Crédito</option>
+                                                <option value="Débito">Débito</option>
+                                                <option value="Pix">Pix</option>
+                                            </select>
+                                            <label class="control-label">Forma de Pagamento</label>
+                                            <span asp-validation-for="Venda.TipoPagamento" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init id="formaPagamentoContainer" class="form-outline text-center d-none">
+                                            <select id="statusParcelamento" class="form-select form-select-lg" asp-for="Venda.StatusPagamento">
+                                                <option value="À vista">À vista</option>
+                                                <option value="Dividido de 2x">Dividido de 2x</option>
+                                                <option value="Dividido de 3x">Dividido de 3x</option>
+                                                <option value="Dividido de 4x">Dividido de 4x</option>
+                                                <option value="Dividido de 5x">Dividido de 5x</option>
+                                                <option value="Dividido de 6x">Dividido de 6x</option>
+                                            </select>
+                                            <label asp-for="Venda.StatusPagamento" class="control-label">Parcelamento</label>
+                                            <span asp-validation-for="Venda.StatusPagamento" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Venda.CpfDoCliente" class="form-control form-control-lg" />
+                                            <label class="control-label">CPF do Cliente</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Lista para exibir os códigos de barra adicionados -->
+                                <div class="mt-4">
+                                    <h5 id="codBarrasAdc"></h5>
+                                    <div style="width: 150px" id="codBarrasList" class="list-group"></div>
+                                </div>
+
+                                <!-- Inputs ocultos para enviar os códigos de barras -->
+                                <div id="hiddenInputsContainer"></div>
+                                
+                                <input type="hidden" id="totalCompraHidden" asp-for="Venda.TotalDaVenda" />
+
+
+                                <div class="text-center d-flex justify-content-center">
+                                    <input data-mdb-button-init data-mdb-ripple-init class="btn btn-primary" type="submit" value="Registrar" />
+                                </div>
+
+                                <div class="text-center mb-2 d-flex justify-content-end d-none" id="containerTotalCompra">
+                                    <strong><p class="fw-bold">Total da Compra: R$ <span id="totalCompra"></span></p></strong>
+                                </div>
+
+                            </form>
+
+                            <!-- Modal para adicionar código de barras -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center">
+                                            <h5 class="modal-title" id="exampleModalLabel">Adicionar Produto</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label class="control-label">Código de Barras:</label>
+                                            <input id="produtoCodBarras" class="form-control form-control-lg input-borda" onblur="retornaQuantidade()" />
+                                            <p id="jaAdicionado" class="d-none text-danger">Este código de Barras já foi adicionado ou a entrada está vazia!</p>
+                                            <div id="containerQuantidade" class="d-none">
+                                                <p>Quantidade disponível:<span id="quantidadeDisponivel"></span></p>
+                                            </div>
+                                            <div data-mdb-input-init>
+                                                <label class="form-label">Quantidade comprada:</label>
+                                                <input min="0" type="number" id="quantidadeComprada" class="form-control" style="width: 6rem;" />
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                            <button type="button" class="btn btn-primary" id="adicionarProdutoBtn">Adicionar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal para adicionar código de barras -->
+                            <!-- Modal para exibir detalhes do código de barras -->
+                            <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="detailsModalLabel">Detalhes do Código de Barras</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p id="modalCodBarrasDetail"></p>
+                                            <p><strong>Nome do Produto:</strong> <span id="nome"></span></p>
+                                            <p><strong>Preço: </strong><span id="preco"></span></p>
+                                            <p><strong>Código de Barras: </strong><span id="codigobarras"></span></p>
+                                            <p><strong>Quantidade Disponível: </strong><span id="quantidade"></span></p>
+                                            <p><strong>Categoria: </strong><span id="categoria"></span></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal para exibir detalhes do código de barras -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script>
+    var codBarrasAdicionados = [];
+    var totalCompra = 0;
+    var produtoDados = {};
+
+
+    document.getElementById('adicionarProdutoBtn').addEventListener('click', function () {
+        var input = document.getElementById('produtoCodBarras');
+
+        var codBarras = input.value.trim();
+
+        if (codBarras !== "" && !codBarrasAdicionados.includes(codBarras)) {
+            codBarrasAdicionados.push(input.value);
+            atualizaTotalCompra();
+            newInstanciaCodBarras();
+
+            var temCodBarras = document.getElementById('codBarrasAdc')
+            temCodBarras.textContent = "Códigos de Barra Adicionados:";           
+
+            // Cria um novo botão para o código de barras
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'btn btn-link text-start p-0 m-0';
+            button.textContent = codBarras;
+
+            // Adiciona um evento de clique para abrir o modal com detalhes
+            button.addEventListener('click', function () {
+                fetchCodBarrasDetails(codBarras);
+            });
+
+            // Adiciona o botão à lista
+            document.getElementById('codBarrasList').appendChild(button);
+
+            // Adiciona um input oculto com o código de barras
+            // var hiddenInput = document.createElement('input');
+            // hiddenInput.type = 'hidden';
+            // hiddenInput.name = ''; // Ajuste conforme o nome do seu modelo
+            // hiddenInput.value = codBarras;
+            // document.getElementById('hiddenInputsContainer').appendChild(hiddenInput);            
+
+            // Limpa o input
+            input.value = "";
+
+            // Fecha o modal (opcional)
+            var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+            modal.hide();
+        }
+        else {
+            var jaAdicionado = document.getElementById('jaAdicionado');
+            jaAdicionado.classList.remove('d-none');
+        }
+    });
+
+    function newInstanciaCodBarras() {
+        var input = document.getElementById('produtoCodBarras');
+        var codBarras = input.value;
+        var quantidade = document.getElementById('quantidadeComprada').value;
+
+        console.log(codBarras);
+        console.log(quantidade);
+
+        fetch(`/Venda/NovaVenda?handler=CodBarrasList&codBarras=${codBarras}&quantidade=${quantidade}`);        
+    }
+
+    function retornaQuantidade() {
+        var input = document.getElementById('produtoCodBarras');
+        var codBarras = input.value;
+
+        fetch(`/Venda/NovaVenda?handler=FetchCodBarrasDetails&codBarras=${codBarras}`)
+            .then(response => response.json())
+            .then(data => {
+                if (codBarras != "") {
+                    document.getElementById('quantidadeDisponivel').textContent = data.Quantidade;
+                    var container = document.getElementById('containerQuantidade');
+                    container.classList.remove('d-none');
+
+                    var quantidadeComprada = document.getElementById('quantidadeComprada');
+                    // quantidadeComprada.value = 0;
+                    quantidadeComprada.max = data.Quantidade;
+                }
+            })
+            .catch(error => {
+                document.getElementById('quantidadeDisponivel').textContent = 'Erro ao carregar detalhes.';
+            });
+
+    }
+
+    function retornaDadosCodBarras(codBarras) {
+        return fetch(`/Venda/NovaVenda?handler=FetchCodBarrasDetails&codBarras=${codBarras}`)
+            .then(response => response.json())
+            .then(data => {
+                return data;
+            })
+            .catch(error => {
+                window.alert('Erro ao acessar o Banco de Dados');
+            });
+    }
+
+    function atualizaTotalCompra() {
+        var codBarras = document.getElementById('produtoCodBarras').value;
+
+        retornaDadosCodBarras(codBarras).then(data => {
+            var preco = data.Preco;
+            var quantidade = document.getElementById('quantidadeComprada').value;
+
+            totalCompra = totalCompra + (preco * quantidade);
+
+            document.getElementById('totalCompra').textContent = totalCompra.toFixed(2);
+
+            document.getElementById('totalCompraHidden').value = parseFloat(totalCompra.toFixed(2));
+
+            // Remove a classe d-none para exibir a div
+            document.getElementById('containerTotalCompra').classList.remove('d-none');
+
+
+
+            console.log(totalCompra);
+        });
+    }
+
+
+    function fetchCodBarrasDetails(codBarras) {
+        fetch(`/Venda/NovaVenda?handler=FetchCodBarrasDetails&codBarras=${codBarras}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalCodBarrasDetail').textContent = data.detail;
+                var detailsModal = new bootstrap.Modal(document.getElementById('detailsModal'));
+
+                document.getElementById('nome').textContent = data.NomeDoProduto;
+                document.getElementById('preco').textContent = data.Preco;
+                document.getElementById('codigobarras').textContent = data.CodigoDeBarras;
+                document.getElementById('quantidade').textContent = data.Quantidade;
+                document.getElementById('categoria').textContent = data.Categoria;
+
+                detailsModal.show();
+            })
+            .catch(error => {
+                document.getElementById('modalCodBarrasDetail').textContent = 'Erro ao carregar detalhes.';
+            });
+    }
+
+    function statusPagamento() {
+        var formaPagamento = document.getElementById('formaPagamento').value
+        var container = document.getElementById('formaPagamentoContainer');
+        var statusParcelamento = document.getElementById('statusParcelamento');
+
+        if (formaPagamento == 'Pix' || formaPagamento == 'Débito' || formaPagamento == 'Dinheiro') {
+            container.classList.remove('d-none');
+            statusParcelamento.disabled = true;
+            statusParcelamento.value = 'À vista';            
+            console.log(formaPagamento);
+        }
+        else if (formaPagamento == 'Crédito') {
+            container.classList.remove('d-none');
+            statusParcelamento.disabled = false;
+        }
+        else {
+            container.classList.add('d-none');
+        }
+    }
+
+    function habilitarCampoParcelamento() {
+        var statusParcelamento = document.getElementById('statusParcelamento');
+        statusParcelamento.disabled = false; // habilita o campo antes de enviar o formulário
+    }
+</script>

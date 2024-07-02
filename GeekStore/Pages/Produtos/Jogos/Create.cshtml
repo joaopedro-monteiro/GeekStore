@@ -1,0 +1,108 @@
+﻿@page
+@model GeekStore.Pages.Produtos.Jogos.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<body class="vh-98 gradient-custom">
+    <section>
+        <div class="container  h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-10">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Cadastrar Novo Jogo</h3>
+                            <form method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Jogos.CodBarras" class="form-control form-control-lg input-borda" />
+                                            <label asp-for="Jogos.CodBarras" class="control-label">Código de Barras</label>
+                                            <span asp-validation-for="Jogos.CodBarras" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Jogos.NomeDoProduto" class="form-control form-control-lg" />
+                                            <label asp-for="Jogos.NomeDoProduto" class="control-label">Nome do Produto</label>
+                                            <span asp-validation-for="Jogos.NomeDoProduto" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Jogos.Fabricante" class="form-control form-control-lg" />
+                                            <label asp-for="Jogos.Fabricante" class="control-label">Fabricante</label>
+                                            <span asp-validation-for="Jogos.Fabricante" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-4 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Jogos.Quantidade" class="form-control form-control-lg" />
+                                            <label asp-for="Jogos.Quantidade" class="control-label">Quantidade</label>
+                                            <span asp-validation-for="Jogos.Quantidade" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Jogos.Valor" class="form-control form-control-lg" />
+                                            <label asp-for="Jogos.Valor" class="control-label">Valor do Produto</label>
+                                            <span asp-validation-for="Jogos.Valor" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <select class="form-select form-select-lg" id="gaming-platforms" asp-for="Jogos!.Plataforma">
+                                                <option value="">Selecione uma Plataforma</option>
+                                                <option value="ps5">PlayStation 5</option>
+                                                <option value="ps4">PlayStation 4</option>
+                                                <option value="xbox-series-x">Xbox Series X</option>
+                                                <option value="xbox-series-s">Xbox Series S</option>
+                                                <option value="xbox-one">Xbox One</option>
+                                                <option value="nintendo-switch">Nintendo Switch</option>
+                                                <option value="pc">PC</option>
+                                                <option value="mac">Mac</option>
+                                                <option value="linux">Linux</option>
+                                                <option value="stadia">Google Stadia</option>
+                                                <option value="geforce-now">NVIDIA GeForce Now</option>
+                                                <option value="amazon-luna">Amazon Luna</option>
+                                                <option value="ios">iOS</option>
+                                                <option value="android">Android</option>
+                                            </select>
+                                            <label class="form-label">Plataforma</label>
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Jogos.PrazoDeGarantia" class="form-control form-control-lg" />
+                                            <label asp-for="Jogos.PrazoDeGarantia" class="control-label">Prazo de Garantia (em meses)</label>
+                                            <span asp-validation-for="Jogos.PrazoDeGarantia" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 pt-2 text-center">
+                                    <input data-mdb-button-init data-mdb-ripple-init class="btn btn-primary" type="submit" value="Criar" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

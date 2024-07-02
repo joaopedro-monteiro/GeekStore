@@ -1,0 +1,35 @@
+﻿@model GeekStore.Pages.Produtos.Infraestrutura.Models.Jogos
+
+<div id="exibirForm" class="row align-items-center justify-content-center" style="display: none">
+    <div class="col-md-4 mb-4">
+        <div data-mdb-input-init class="form-outline text-center">
+            <input type="text" class="form-control form-control-lg" asp-for="PrazoDeGarantia" />
+            <label class="form-label">Prazo de Garantia (meses)</label>
+            <span class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div data-mdb-input-init class="form-outline text-center">
+            <select class="form-control form-control-lg" id="gaming-platforms" asp-for="Plataforma">
+                <option value="">Selecione uma Plataforma</option>
+                <option value="ps5">PlayStation 5</option>
+                <option value="ps4">PlayStation 4</option>
+                <option value="xbox-series-x">Xbox Series X</option>
+                <option value="xbox-series-s">Xbox Series S</option>
+                <option value="xbox-one">Xbox One</option>
+                <option value="nintendo-switch">Nintendo Switch</option>
+                <option value="pc">PC</option>
+                <option value="mac">Mac</option>
+                <option value="linux">Linux</option>
+                <option value="stadia">Google Stadia</option>
+                <option value="geforce-now">NVIDIA GeForce Now</option>
+                <option value="amazon-luna">Amazon Luna</option>
+                <option value="ios">iOS</option>
+                <option value="android">Android</option>
+            </select>
+            <label class="form-label">Plataforma</label>
+            <span class="text-danger"></span>
+        </div>
+    </div>
+</div>

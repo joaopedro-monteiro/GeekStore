@@ -1,0 +1,84 @@
+﻿@page
+@model GeekStore.Pages.Clientes.DeleteModel
+@{
+}
+
+<h1>Apagar Cliente</h1>
+
+<h3>Você tem certeza que deseja apagar este Cliente?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Nome):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Cpf):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Cpf)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Telefone):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Telefone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Email):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Endereco!.Cep):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Endereco!.Cep)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Endereco!.Cidade):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Endereco!.Cidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Endereco!.Estado):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Endereco!.Estado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Endereco!.Rua):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Endereco!.Rua)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Endereco!.Numero):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Endereco!.Numero)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Endereco!.Bairro):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Endereco!.Bairro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model!.Endereco!.Complemento):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model!.Endereco!.Complemento)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
+        <a asp-page="Index">Voltar</a>
+    </form>
+</div>

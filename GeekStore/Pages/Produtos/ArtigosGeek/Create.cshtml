@@ -1,0 +1,72 @@
+﻿@page
+@model GeekStore.Pages.Produtos.ArtigosGeek.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<body class="vh-98 gradient-custom">
+    <section>
+        <div class="container  h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-10">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Cadastrar Novo Artigo Geek</h3>
+                            <form method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Produtos.CodBarras" class="form-control form-control-lg input-borda" />
+                                            <label asp-for="Produtos.CodBarras" class="control-label">Código de Barras</label>
+                                            <span asp-validation-for="Produtos.CodBarras" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Produtos.NomeDoProduto" class="form-control form-control-lg" />
+                                            <label asp-for="Produtos.NomeDoProduto" class="control-label">Nome do Produto</label>
+                                            <span asp-validation-for="Produtos.NomeDoProduto" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-8 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Produtos.Fabricante" class="form-control form-control-lg" />
+                                            <label asp-for="Produtos.Fabricante" class="control-label">Fabricante</label>
+                                            <span asp-validation-for="Produtos.Fabricante" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-4 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Produtos.Quantidade" class="form-control form-control-lg" />
+                                            <label asp-for="Produtos.Quantidade" class="control-label">Quantidade</label>
+                                            <span asp-validation-for="Produtos.Quantidade" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div data-mdb-input-init class="form-outline text-center">
+                                            <input asp-for="Produtos.Valor" class="form-control form-control-lg" />
+                                            <label asp-for="Produtos.Valor" class="control-label">Valor do Produto</label>
+                                            <span asp-validation-for="Produtos.Valor" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 pt-2 text-center">
+                                    <input data-mdb-button-init data-mdb-ripple-init class="btn btn-primary" type="submit" value="Criar" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

@@ -16,31 +16,30 @@ namespace GeekStore.Pages.Account.Register
 
         public async Task<IActionResult> OnPostRegister()
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) 
+                return Page();
+            var user = new IdentityUser
             {
-                var user = new IdentityUser
-                {
-                    UserName = Model!.UserName,
-                    PhoneNumber = Model.PhoneNumber,
-                    Email = Model.Email
-                };
+                UserName = Model!.UserName,
+                PhoneNumber = Model.PhoneNumber,
+                Email = Model.Email
+            };
 
-                var result = await userManager.CreateAsync(user, Model.Password!);
+            var result = await userManager.CreateAsync(user, Model.Password!);
 
-                if (result.Succeeded)
-                {
-                    await signInManager.SignInAsync(user, isPersistent: false);
+            if (result.Succeeded)
+            {
+                await signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToPage("/Index");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                return RedirectToPage("/Index");
             }
 
-            return RedirectToPage("/Account/Register/Index");
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return Page();
         }
     }
 }

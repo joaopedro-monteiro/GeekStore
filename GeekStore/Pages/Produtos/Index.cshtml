@@ -1,0 +1,90 @@
+﻿@page
+@model GeekStore.Pages.Produtos.IndexModel
+
+@{
+    Layout = "Shared/_LayoutVazio";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Tabela de Clientes</strong>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered table-striped table-borderless">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Código de Barras</th>
+                                <th scope="col">Nome do Produto</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Preço</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var produto in Model.Produtos!)
+                            {
+                                <tr class="align-middle text-center">
+                                    <td>@produto.CodBarras</td>
+                                    <td>@produto.NomeDoProduto</td>
+                                    <td>@produto.Quantidade</td>
+                                    <td>@produto.Valor</td>
+                                    <td>
+                                        <a asp-page="ArtigosGeek/Edit" asp-route-id="@produto.Id"><i class="fa-solid fa-pen-to-square" title="Editar"></i></a>
+                                        <a asp-page="ArtigosGeek/Delete" asp-route-id="@produto.Id"><i class="fa-solid fa-trash" title="Excluir"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+                            @foreach (var jogo in Model.Jogos!)
+                            {
+                                <tr class="align-middle text-center">
+                                    <td>@jogo.CodBarras</td>
+                                    <td>@jogo.NomeDoProduto</td>
+                                    <td>@jogo.Quantidade</td>
+                                    <td>@jogo.Valor</td>
+                                    <td>
+                                        <a asp-page="Jogos/Edit" asp-route-id="@jogo.Id"><i class="fa-solid fa-pen-to-square" title="Editar"></i></a>
+                                        <a asp-page="Jogos/Delete" asp-route-id="@jogo.Id"><i class="fa-solid fa-trash" title="Excluir"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+                            @foreach (var acessorio in Model.Acessorios!)
+                            {
+                                <tr class="align-middle text-center">
+                                    <td>@acessorio.CodBarras</td>
+                                    <td>@acessorio.NomeDoProduto</td>
+                                    <td>@acessorio.Quantidade</td>
+                                    <td>@acessorio.Valor</td>
+                                    <td>
+                                        <a asp-page="Acessorios/Edit" asp-route-id="@acessorio.Id"><i class="fa-solid fa-pen-to-square" title="Editar"></i></a>
+                                        <a asp-page="Acessorios/Delete" asp-route-id="@acessorio.Id"><i class="fa-solid fa-trash" title="Excluir"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <a asp-page="ArtigosGeek/Create" class="btn btn-primary ms-2">Novo Artigo Geek</a>
+                    <a asp-page="Jogos/Create" class="btn btn-info ms-2">Novo Jogo</a>
+                    <a asp-page="Acessorios/Create" class="btn btn-outline-danger ms-2">Novo Acessório</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dataTable = new DataTable('table', {
+            language: {
+                url: '/js/dataTablesTranslate/pt-br.json',
+            }
+        });
+    });
+</script>

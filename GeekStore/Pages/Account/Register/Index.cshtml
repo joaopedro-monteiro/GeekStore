@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/novaconta.css" />
     <script defer src="js/login/novaconta.js"></script>
 </head>
-<body class="vh-98 gradient-custom" style="background: #f093fb; background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1)); background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));">
+<body class="vh-98 gradient-custom">
     <section>
         <div class="container py-5 h-100">
             <div class="row justify-content-center align-items-center h-100">
@@ -47,6 +47,26 @@
                                             <input type="text" id="celular" class="form-control form-control-lg" asp-for="Model!.PhoneNumber" placeholder="(xx) xxxxx-xxxx" onclick="celularMask()" />
                                             <label class="form-label">Celular</label>
                                             <span asp-validation-for="Model!.PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+
+                                        <div data-mdb-input-init class="form-outline">
+                                            <input class="form-control form-control-lg" asp-for="Model!.Password" />
+                                            <label class="form-label">Senha</label>
+                                            <span asp-validation-for="Model!.Password" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+
+                                        <div data-mdb-input-init class="form-outline">
+                                            <input class="form-control form-control-lg" asp-for="Model!.ConfirmPassword" />
+                                            <label class="form-label">Confirme a senha</label>
+                                            <span asp-validation-for="Model!.ConfirmPassword" class="text-danger"></span>
                                         </div>
 
                                     </div>

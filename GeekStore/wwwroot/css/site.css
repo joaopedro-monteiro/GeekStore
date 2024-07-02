@@ -1,3 +1,15 @@
+/* Para navegadores Webkit (Chrome, Safari, etc.) */
+/*input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}*/
+
+/* Para navegadores Firefox */
+/*input[type=number] {
+    -moz-appearance: textfield;
+}*/
+
 html {
     font-size: 14px;
 }
@@ -29,3 +41,36 @@ body {
 .card {
     box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
 }
+
+.nav-item > button:hover {
+    cursor: pointer;
+    transition: font-size 0.5s ease;
+    transform: scale(1.25);
+}
+
+.nav-item > a:hover {
+    cursor: pointer;
+    transition: font-size 0.5s ease;
+    transform: scale(1.25);
+}
+
+button, a, input {
+    border-radius: 12px;
+}
+
+form input, select {
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    font-size: 16px !important;
+    transition: border-color 0.3s, box-shadow 0.3s !important;
+}
+
+    form input:focus, select:focus {
+        border-color: #007bff !important;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5) !important;
+        outline: none !important;
+    }
+
+    form input::placeholder {
+        color: #aaa !important;
+    }

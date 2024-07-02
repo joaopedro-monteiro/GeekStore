@@ -1,0 +1,78 @@
+﻿@page
+@model GeekStore.Pages.Clientes.IndexModel
+@{
+    Layout = "Shared/_LayoutVazio";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <strong>Tabela de Clientes</strong>
+                    <a asp-page="Create" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Novo Cliente</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered table-striped table-borderless">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Nome Completo</th>
+                                <th scope="col">CPF</th>
+                                <th scope="col">RG</th>
+                                <th scope="col">Data do Cadastro</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Rua</th>
+                                <th scope="col">Número</th>
+                                <th scope="col">Bairro</th>
+                                <th scope="col">Complemento</th>
+                                <th scope="col">Cidade</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Cep</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var clientes in Model.Clientes!)
+                            {
+                                <tr class="align-middle text-center">
+                                    <td>@clientes.Nome</td>
+                                    <td>@clientes.Cpf</td>
+                                    <td>@clientes.Rg</td>
+                                    <td>@clientes.DataDoCadastro.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>@clientes.Telefone</td>
+                                    <td>@clientes.Email</td>
+                                    <td>@clientes.Endereco!.Rua</td>
+                                    <td>@clientes.Endereco.Numero</td>
+                                    <td>@clientes.Endereco.Bairro</td>
+                                    <td>@clientes.Endereco.Complemento</td>
+                                    <td>@clientes.Endereco.Cidade</td>
+                                    <td>@clientes.Endereco.Estado</td>
+                                    <td>@clientes.Endereco.Cep</td>
+                                    <td>
+                                        <a asp-page="Update" asp-route-id="@clientes.Id" asp-route-enderecoId="@clientes.EnderecoId"><i class="fa-solid fa-pen-to-square" title="Editar"></i></a>
+                                        <a asp-page="Delete" asp-route-id="@clientes.Id"><i class="fa-solid fa-trash" title="Excluir"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <a asp-page="Create" class="btn btn-primary ms-2">Novo Cliente</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dataTable = new DataTable('table', {
+            language: {
+                url: '/js/dataTablesTranslate/pt-br.json',
+            }
+        });
+    });
+</script>

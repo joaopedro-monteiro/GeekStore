@@ -8,7 +8,15 @@ namespace GeekStore.Core.Config
     {
         public static void RegisterIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<GeekStoreDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 10;
+                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<GeekStoreDbContext>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
@@ -21,6 +29,8 @@ namespace GeekStore.Core.Config
             {
                 options.Password.RequiredLength = 10;
                 options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
                 options.Password.RequireNonAlphanumeric = false;
             });
         }
